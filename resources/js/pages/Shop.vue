@@ -1,5 +1,6 @@
 <script setup>
 import axios from "axios";
+import AddToCart from "../components/AddToCart.vue";
 </script>
 <template>
     <!-- Hero Section Begin -->
@@ -58,6 +59,7 @@ import axios from "axios";
             </div>
         </div>
     </section>
+
     <!-- Hero Section End -->
 
     <!-- Breadcrumb Section Begin -->
@@ -362,16 +364,16 @@ import axios from "axios";
                             </div>
                         </div>
                     </div>
-                    <div class="row" v-if="loading">
+                    <div class="row">
                         <div
-                            v-for="product in myproducts"
-                            :key="product.id"
+                            v-for="(product, index) in products"
+                            :key="index"
                             class="col-lg-4 col-md-6 col-sm-6"
                         >
                             <div class="product__item">
                                 <div
                                     class="product__item__pic set-bg"
-                                    data-setbg="/frontend/img/product/product-1.jpg"
+                                    data-setbg="/frontend/img/no_image.jpg"
                                 >
                                     <ul class="product__item__pic__hover">
                                         <li>
@@ -384,13 +386,9 @@ import axios from "axios";
                                                 ><i class="fa fa-retweet"></i
                                             ></a>
                                         </li>
-                                        <li>
-                                            <a href="#"
-                                                ><i
-                                                    class="fa fa-shopping-cart"
-                                                ></i
-                                            ></a>
-                                        </li>
+                                        <add-to-cart
+                                            :pr_id="product.id"
+                                        ></add-to-cart>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
@@ -399,7 +397,7 @@ import axios from "axios";
                                             product.product_name
                                         }}</a>
                                     </h6>
-                                    <h5>{{ product.price }}</h5>
+                                    <h5></h5>
                                 </div>
                             </div>
                         </div>
@@ -420,15 +418,16 @@ import axios from "axios";
 export default {
     data() {
         return {
-            myproducts: [],
+            products: [],
+            items: [{ message: "Foo" }, { message: "Bar" }],
         };
     },
 
     methods: {
         productData() {
             axios.get("/products").then((response) => {
-                this.myproducts = response.data;
-                console.log(response.data);
+                this.products = response.data;
+                //console.log(response.data);
             });
         },
     },

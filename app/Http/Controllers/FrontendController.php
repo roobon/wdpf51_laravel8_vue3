@@ -7,6 +7,7 @@ use App\Models\Product;
 
 class FrontendController extends Controller
 {
+    
     public function index()
     {
         return view('front');
@@ -14,7 +15,7 @@ class FrontendController extends Controller
 
     public function allProducts()
     {
-        $products =  Product::all();
+        $products =  Product::limit(10)->get();
         return response()->json($products);
     }
 }
