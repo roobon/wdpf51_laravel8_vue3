@@ -8,10 +8,10 @@ import axios from "axios";
                 <a href="#"><i class="fa fa-heart"></i> <span>1</span></a>
             </li>
             <li>
-                <a href="#"
-                    ><i class="fa fa-shopping-bag"></i>
-                    <span>{{ cartItems }}</span></a
-                >
+                <router-link to="/cartitems">
+                    <i class="fa fa-shopping-bag"></i>
+                    <span>{{ cartItems.length }}</span>
+                </router-link>
             </li>
         </ul>
         <div class="header__cart__price">item: <span>$150.00</span></div>
@@ -26,7 +26,7 @@ export default {
     },
     methods: {
         getCartItems() {
-            axios.get("api/cart").then((response) => {
+            axios.get("/cart").then((response) => {
                 this.cartItems = response.data;
             });
         },

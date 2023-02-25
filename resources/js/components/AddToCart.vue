@@ -13,7 +13,7 @@ export default {
     methods: {
         addProducttoCart() {
             //alert("Your Product ID: " + this.pr_id);
-            axios.post("api/cart", { prid: this.pr_id }).then((response) => {
+            axios.post("/cart", { prid: this.pr_id }).then((response) => {
                 console.log(response.data);
             });
         },

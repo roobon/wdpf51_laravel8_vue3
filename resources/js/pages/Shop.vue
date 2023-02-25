@@ -5,6 +5,7 @@ import AddToCart from "../components/AddToCart.vue";
 <template>
     <!-- Hero Section Begin -->
     <section class="hero hero-normal">
+        {{ userid }}
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -419,7 +420,8 @@ export default {
     data() {
         return {
             products: [],
-            items: [{ message: "Foo" }, { message: "Bar" }],
+            userid: "",
+            // items: [{ message: "Foo" }, { message: "Bar" }],
         };
     },
 
@@ -427,7 +429,8 @@ export default {
         productData() {
             axios.get("/products").then((response) => {
                 this.products = response.data;
-                //console.log(response.data);
+                //userid = response.data;
+                console.log(response.data);
             });
         },
     },
